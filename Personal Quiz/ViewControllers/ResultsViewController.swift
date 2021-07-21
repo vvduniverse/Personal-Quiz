@@ -22,20 +22,20 @@ class ResultsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.setHidesBackButton(true, animated: false)
-        printArray()
+        navigationItem.setHidesBackButton(true, animated: false)
+//        printArray()
         countResults()
     }
     
     private func countResults() {
-        var animalsCount: [AnimalType : Int] = [:]
+        var animalsKindCount: [AnimalType : Int] = [:]
         let animals = answersResults.map { $0.type }
         
         for animal in animals {
-            animalsCount[animal] = (animalsCount[animal] ?? 0) + 1
+            animalsKindCount[animal] = (animalsKindCount[animal] ?? 0) + 1
         }
         
-        let animalsCountSorted = animalsCount.sorted { $0.value > $1.value }
+        let animalsCountSorted = animalsKindCount.sorted { $0.value > $1.value }
         
         guard let winnerAnimal = animalsCountSorted.first?.key else { return }
         
@@ -47,14 +47,14 @@ class ResultsViewController: UIViewController {
         finalExplorationLabel.text = "\(animal.definition)"
     }
     
-    private func printArray() {
-        print(answersResults.count)
-        
-        answersResults.forEach { some in
-            print(some.type.rawValue)
-            print(some.type)
-            print(some.type.definition)
-            print()
-        }
-    }
+//    private func printArray() {
+//        print(answersResults.count)
+//
+//        answersResults.forEach { some in
+//            print(some.type.rawValue)
+//            print(some.type)
+//            print(some.type.definition)
+//            print()
+//        }
+//    }
 }
