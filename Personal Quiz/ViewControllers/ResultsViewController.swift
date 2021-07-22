@@ -9,16 +9,11 @@
 import UIKit
 
 class ResultsViewController: UIViewController {
-    // 1. Передать сюда массив с ответами
-    // 2. Определить наиболее часто встерчающийся тип живтоного
-    // 3. Отобразить результат в соответсвии с этим животным
-    // 4. Избавиться от кнопки возврата назад на экране результатов
-    
-    var answersResults: [Answer]!
     
     @IBOutlet weak var finalResultLabel: UILabel!
     @IBOutlet weak var finalExplorationLabel: UILabel!
     
+    var answersResults: [Answer] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,22 +26,20 @@ class ResultsViewController: UIViewController {
         var animalsKindCount: [AnimalType : Int] = [:]
         let animals = answersResults.map { $0.type }
         
-        for animal in animals {
+//        print(animals)
+                
+        animals.forEach { animal in
             animalsKindCount[animal] = (animalsKindCount[animal] ?? 0) + 1
         }
         
         let animalsCountSorted = animalsKindCount.sorted { $0.value > $1.value }
-        
         guard let winnerAnimal = animalsCountSorted.first?.key else { return }
         
-        updateUI(with: winnerAnimal)
-     }
-    
-    private func updateUI(with animal: AnimalType) {
-        finalResultLabel.text = "Вы - \(animal.rawValue)"
-        finalExplorationLabel.text = "\(animal.definition)"
+        finalResultLabel.text = "Вы - \(winnerAnimal.rawValue)"
+        finalExplorationLabel.text = "\(winnerAnimal.definition)"
+        
     }
-    
+        
 //    private func printArray() {
 //        print(answersResults.count)
 //
