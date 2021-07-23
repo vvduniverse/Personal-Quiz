@@ -18,15 +18,12 @@ class ResultsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.setHidesBackButton(true, animated: false)
-//        printArray()
         countResults()
     }
     
     private func countResults() {
         var animalsKindCount: [AnimalType : Int] = [:]
         let animals = answersResults.map { $0.type }
-        
-//        print(animals)
                 
         animals.forEach { animal in
             animalsKindCount[animal] = (animalsKindCount[animal] ?? 0) + 1
@@ -35,19 +32,11 @@ class ResultsViewController: UIViewController {
         let animalsCountSorted = animalsKindCount.sorted { $0.value > $1.value }
         guard let winnerAnimal = animalsCountSorted.first?.key else { return }
         
-        finalResultLabel.text = "Вы - \(winnerAnimal.rawValue)"
-        finalExplorationLabel.text = "\(winnerAnimal.definition)"
-        
+        showResult(with: winnerAnimal)
     }
-        
-//    private func printArray() {
-//        print(answersResults.count)
-//
-//        answersResults.forEach { some in
-//            print(some.type.rawValue)
-//            print(some.type)
-//            print(some.type.definition)
-//            print()
-//        }
-//    }
+    
+    private func showResult(with animal: AnimalType) {
+        finalResultLabel.text = "Вы - \(animal.rawValue)"
+        finalExplorationLabel.text = "\(animal.definition)"
+    }
 }
